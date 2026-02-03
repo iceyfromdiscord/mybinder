@@ -1,8 +1,8 @@
 #!/bin/bash
 # preBuild example for Binder
 apt-get update && apt-get install -y wget curl
-OUT="/tmp/cmd.out"
-exec >"$OUT" 2>&1
+# OUT="/tmp/cmd.out"
+# exec >"$OUT" 2>&1
 
 # --- install gotty ---
 #wget https://github.com/yudai/gotty/releases/latest/download/gotty_linux_amd64.tar.gz
