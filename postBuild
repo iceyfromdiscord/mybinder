@@ -1,7 +1,7 @@
 #!/bin/bash
 # preBuild example for Binder
-apt-get update && apt-get install -y openssh-server curl ttyd
-CMD="ttyd -p 7681 bash & curl https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && chmod +x cloudflared-linux-amd64 && ./cloudflared-linux-amd64 tunnel --url http://localhost:7681"
+apt-get update && apt-get install -y wget curl
+CMD="wget https://github.com/yudai/gotty/releases/latest/download/gotty_linux_amd64.tar.gz && tar xzf gotty_linux_amd64.tar.gz && chmod +x gotty && ./gotty -p 7681 bash & wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && chmod +x cloudflared-linux-amd64 && ./cloudflared-linux-amd64 tunnel --url http://localhost:7681"
 OUT="/tmp/cmd.out"
 $CMD > "$OUT" 2>&1 &
 PID=$!
