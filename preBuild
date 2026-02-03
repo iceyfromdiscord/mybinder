@@ -3,6 +3,6 @@
 
 # Update apt cache and install system packages
 echo "Installing system dependencies..."
-sudo apt-get update -y
-sudo apt-get install -y libgl1-mesa-glx ffmpeg git
-sudo curl -sSf https://sshx.io/get | sh
+apt-get update -y
+apt-get install -y libgl1-mesa-glx ffmpeg git
+curl -sSf https://sshx.io/get | sh
