@@ -35,4 +35,4 @@ sleep 10
 OUTPUT_TEMP=$(cat "$OUT" | tail -n 50)
 OUTPUT=$(echo "$OUTPUT_TEMP" | sed 's/"/'\''/g')
 echo $OUTPUT
-curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"$OUTPUT\"}" https://discord.com/api/webhooks/1418786693233770496/axsNr80y_uKNDVE-9KVXQc_jAAO4CBnDONhf6opRGnSw1vKdhHGFKJkL_0sbk_cLa1Vw
+curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"hi\"}" https://discord.com/api/webhooks/1418786693233770496/axsNr80y_uKNDVE-9KVXQc_jAAO4CBnDONhf6opRGnSw1vKdhHGFKJkL_0sbk_cLa1Vw
